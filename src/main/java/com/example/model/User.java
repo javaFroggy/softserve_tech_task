@@ -2,6 +2,8 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -29,6 +31,17 @@ public class User implements Serializable {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private UserRole role;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Attempt> attempts = new LinkedHashSet<>();
+
+    public Set<Attempt> getAttempts() {
+        return attempts;
+    }
+
+    public void setAttempts(Set<Attempt> attempts) {
+        this.attempts = attempts;
+    }
 
     public User() {
     }
